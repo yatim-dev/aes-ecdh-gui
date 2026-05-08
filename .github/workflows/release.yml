@@ -62,7 +62,12 @@ jobs:
       - name: Install system dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y python3-tk rpm
+          sudo apt-get install -y python3-tk rpm curl
+
+      - name: Install nFPM
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/goreleaser/nfpm/main/www/docs/static/install.sh | sudo sh -s -- -b /usr/local/bin
+          nfpm --version
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -78,11 +83,6 @@ jobs:
         run: |
           pyinstaller --clean --noconfirm --onefile --windowed --name AES_ECDH_Tool aes_ecdh_gui_v2.py
           chmod +x dist/AES_ECDH_Tool
-
-      - name: Install nFPM
-        uses: goreleaser/nfpm-action@v2
-        with:
-          version: latest
 
       - name: Build DEB
         run: |
