@@ -64,10 +64,16 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y python3-tk rpm curl
 
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.22"
+
       - name: Install nFPM
         run: |
-          curl -sSfL https://raw.githubusercontent.com/goreleaser/nfpm/main/www/docs/static/install.sh | sudo sh -s -- -b /usr/local/bin
-          nfpm --version
+          go install github.com/goreleaser/nfpm/v2/cmd/nfpm@latest
+          echo "$HOME/go/bin" >> $GITHUB_PATH
+          "$HOME/go/bin/nfpm" --version
 
       - name: Set up Python
         uses: actions/setup-python@v5
