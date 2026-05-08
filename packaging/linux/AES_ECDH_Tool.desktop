@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=AES ECDH Tool
+Comment=X25519 + AES-256-GCM encryption tool
+Exec=/opt/aes-ecdh-tool/AES_ECDH_Tool
+Icon=aes-ecdh-tool
+Terminal=false
+Categories=Utility;Security;
